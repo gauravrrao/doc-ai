@@ -39,7 +39,7 @@ export function validateExtractedData(
   let lineItemsSum = 0;
   if (extractedData.line_items && Array.isArray(extractedData.line_items)) {
     lineItemsSum = extractedData.line_items.reduce(
-      (sum, item) => sum + (item.line_total || 0),
+      (sum: number, item: any) => sum + (item.line_total || 0),
       0
     );
     
@@ -87,7 +87,7 @@ export function normalizeExtractedData(rawData: any): any {
     currency: rawData.currency?.value || rawData.currency || 'USD',
     totalAmount: parseFloat(rawData.total_amount?.value || rawData.total_amount || 0),
     taxAmount: parseFloat(rawData.tax_amount?.value || rawData.tax_amount || 0),
-    lineItems: (rawData.line_items || []).map(item => ({
+    lineItems: (rawData.line_items || []).map((item: any) => ({
       description: item.description,
       quantity: parseFloat(item.quantity),
       unitPrice: parseFloat(item.unit_price),

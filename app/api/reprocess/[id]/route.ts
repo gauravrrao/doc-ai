@@ -176,6 +176,10 @@ export async function POST(
       console.error('Could not extract params in catch block');
     }
     
+    // Type-guard error to safely access message and stack properties
+    const errorMessage = error instanceof Error ? error.message : String(error);
+    const errorStack = error instanceof Error ? error.stack : undefined;
+    
     // Log the error if we have documentId
     if (documentId) {
       try {
@@ -184,8 +188,8 @@ export async function POST(
             documentId: documentId,
             stage: 'REPROCESS',
             status: 'FAILED',
-            message: error.message,
-            metadata: { error: error.stack },
+            message: errorMessage,
+            metadata: { error: errorStack },
           },
         });
         
@@ -202,7 +206,7 @@ export async function POST(
     return NextResponse.json(
       { 
         error: 'Failed to reprocess document',
-        details: error.message 
+        details: errorMessage 
       },
       { status: 500 }
     );

@@ -103,7 +103,7 @@ export default function UploadZone({ onUpload }: UploadZoneProps) {
 
         toast.success("Upload successful!");
         setSelectedFiles([]);
-        onUpload(formData);
+        onUpload(formData as unknown as FileList);
       } else {
         toast.error("Upload failed");
       }

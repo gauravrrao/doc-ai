@@ -10,7 +10,15 @@ interface MetricsDashboardProps {
 }
 
 export default function MetricsDashboard({ documents }: MetricsDashboardProps) {
-  const [metrics, setMetrics] = useState({
+  const [metrics, setMetrics] = useState<{
+    totalProcessed: number;
+    successRate: number;
+    avgConfidence: number;
+    avgProcessingTime: number;
+    statusDistribution: Record<string, number>;
+    processingTrends: Array<{ date: string; time: number; confidence: number }>;
+    confidenceDistribution: Array<{ range: string; count: number }>;
+  }>({
     totalProcessed: 0,
     successRate: 0,
     avgConfidence: 0,

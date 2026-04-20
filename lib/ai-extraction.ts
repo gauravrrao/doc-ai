@@ -109,7 +109,7 @@ export async function extractInvoiceData(
     }
     
     // Step 2: Prepare prompt
-    const promptConfig = PROMPT_VERSIONS[promptVersion] || PROMPT_VERSIONS['v1.0'];
+    const promptConfig = PROMPT_VERSIONS[promptVersion as keyof typeof PROMPT_VERSIONS] || PROMPT_VERSIONS['v1.0'];
     
     const userPrompt = `Extract invoice data from this text:
     
