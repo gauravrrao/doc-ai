@@ -11,10 +11,10 @@ interface ErrorReportDashboardProps {
 export default function ErrorReportDashboard({ documents }: ErrorReportDashboardProps) {
   const [errorStats, setErrorStats] = useState({
     totalErrors: 0,
-    errorTypes: {},
-    topErrorFields: [],
-    failedDocuments: [],
-    errorTrend: []
+    errorTypes: {} as Record<string, number>,
+    topErrorFields: [] as Array<{ field: string; count: number }>,
+    failedDocuments: [] as any[],
+    errorTrend: [] as Array<{ date: string; errors: number }>
   });
 
   useEffect(() => {
@@ -24,8 +24,8 @@ export default function ErrorReportDashboard({ documents }: ErrorReportDashboard
         d.validationLog && (!d.validationLog.isValid || d.validationLog.warnings?.length > 0)
       );
 
-      const errorTypes: any = {};
-      const errorFields: any = {};
+      const errorTypes: Record<string, number> = {};
+      const errorFields: Record<string, number> = {};
 
       docsWithErrors.forEach(doc => {
         if (doc.validationLog?.missingFields) {
@@ -43,8 +43,8 @@ export default function ErrorReportDashboard({ documents }: ErrorReportDashboard
         }
       });
 
-      const topErrorFields = Object.entries(errorFields)
-        .map(([field, count]) => ({ field, count }))
+      const topErrorFields: Array<{ field: string; count: number }> = Object.entries(errorFields)
+        .map(([field, count]) => ({ field, count: count as number }))
         .sort((a, b) => b.count - a.count)
         .slice(0, 5);
 
