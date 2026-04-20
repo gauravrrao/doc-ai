@@ -1,36 +1,44 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🤖 AI Document Intelligence System
 
-## Getting Started
+[![Next.js](https://img.shields.io/badge/Next.js-16.2.4-black)](https://nextjs.org/)
+[![Prisma](https://img.shields.io/badge/Prisma-6.0.0-blue)](https://prisma.io/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.0-blue)](https://www.typescriptlang.org/)
+[![TailwindCSS](https://img.shields.io/badge/TailwindCSS-3.0-38B2AC)](https://tailwindcss.com/)
+[![Groq](https://img.shields.io/badge/Groq-AI-FF6B6B)](https://groq.com/)
 
-First, run the development server:
+An enterprise-grade AI-powered document intelligence system that automatically extracts, validates, and manages invoice data with high accuracy. Built with Next.js 16, Prisma 6, and Groq AI.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## ✨ Features
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### 📄 Intelligent Document Processing
+- **Multi-format Support**: Process invoices in various layouts and formats
+- **AI-Powered Extraction**: Uses Groq's LLM to extract structured data from unstructured PDFs
+- **Smart Field Mapping**: Automatically identifies fields regardless of naming variations (Invoice No, Bill ID, Inv #, etc.)
+- **Line Item Extraction**: Handles complex multi-line item invoices with tables
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### 🔍 Validation & Quality Assurance
+- **Automatic Validation**: Validates extracted data against business rules
+- **Sum Validation**: Checks if line items sum matches total amount
+- **Confidence Scoring**: Returns confidence scores for each extracted field
+- **Missing Field Detection**: Identifies and reports missing required fields
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### 🎨 Modern User Interface
+- **Drag & Drop Upload**: Bulk upload multiple invoices at once
+- **Real-time Processing**: Live status updates during document processing
+- **Interactive Dashboards**: Visual metrics and analytics
+- **Manual Correction**: Edit extracted fields when needed
+- **Error Report Dashboard**: Comprehensive error tracking and analysis
 
-## Learn More
+### 📊 Monitoring & Analytics
+- **Processing Time Tracking**: Monitor extraction performance
+- **Success Rate Metrics**: Track extraction accuracy over time
+- **Confidence Distribution**: Visualize extraction confidence levels
+- **Error Pattern Analysis**: Identify common extraction issues
 
-To learn more about Next.js, take a look at the following resources:
+### 🔄 Advanced Capabilities
+- **Prompt Versioning**: Manage and version AI prompts
+- **Reprocessing**: Retry failed extractions with different settings
+- **Bulk Processing**: Handle multiple documents simultaneously
+- **Database Storage**: Persistent storage with PostgreSQL and Prisma
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## 🏗️ Architecture
