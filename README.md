@@ -42,3 +42,70 @@ An enterprise-grade AI-powered document intelligence system that automatically e
 - **Database Storage**: Persistent storage with PostgreSQL and Prisma
 
 ## 🏗️ Architecture
+┌─────────────────────────────────────────────────────────────┐
+│ Frontend (Next.js) │
+│ - React Components with Tailwind CSS │
+│ - Real-time uploads with drag-drop │
+│ - Interactive dashboards with Recharts │
+└─────────────────┬───────────────────────────────────────────┘
+│ HTTP/REST API
+┌─────────────────▼───────────────────────────────────────────┐
+│ API Routes (Next.js) │
+│ - /api/documents - Upload & retrieval │
+│ - /api/reprocess - Retry extraction │
+└─────────┬──────────────────┬────────────────────────────────┘
+│ │
+┌─────▼─────┐ ┌─────▼──────┐
+│ Prisma │ │ Groq AI │
+│ ORM │ │ Pipeline │
+└─────┬─────┘ └─────┬──────┘
+│ │
+┌─────▼─────┐ ┌─────▼──────┐
+│PostgreSQL │ │ LLM │
+
+
+
+
+## 🚀 Quick Start
+
+### Prerequisites
+
+- Node.js 18+ 
+- PostgreSQL 14+
+- Groq API Key (free tier available)
+
+### Installation
+
+1. **Clone the repository**
+```bash
+git clone https://github.com/yourusername/ai-document-intelligence.git
+cd ai-document-intelligence
+
+2. Install dependencies
+
+npm install
+
+3. Set up environment variables
+
+Edit .env with your credentials:
+
+4. env
+DATABASE_URL="postgresql://postgres:password@localhost:5432/doc_intelligence"
+GROQ_API_KEY="your-groq-api-key-here"
+NEXT_PUBLIC_APP_URL="http://localhost:3000"
+
+5.Set up database
+
+bash
+# Start PostgreSQL
+sudo service postgresql start  # Linux
+# or
+brew services start postgresql  # macOS
+
+# Create database
+createdb doc_intelligence
+
+# Run Prisma migrations
+npx prisma generate
+npx prisma db push
+
