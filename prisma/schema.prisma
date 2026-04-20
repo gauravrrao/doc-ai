@@ -1,0 +1,83 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Document {
+  id                  String           @id @default(cuid())
+  filename            String
+  originalPath        String
+  cloudinaryPublicId  String?          // Add this field
+  status              String
+  processingTime      Int?
+  confidenceScore     Float?
+  createdAt           DateTime         @default(now())
+  updatedAt           DateTime         @updatedAt
+  extractedData       ExtractedData?
+  validationLog       ValidationLog?
+  processingLogs      ProcessingLog[]
+}
+
+model ExtractedData {
+  id             String   @id @default(cuid())
+  documentId     String   @unique
+  document       Document @relation(fields: [documentId], references: [id], onDelete: Cascade)
+  
+  vendorName     String?
+  invoiceNumber  String?
+  invoiceDate    DateTime?
+  currency       String?
+  totalAmount    Float?
+  taxAmount      Float?
+  
+  lineItems      Json     // Stored as JSON array
+  rawResponse    Json?    // Store raw AI response
+  promptVersion  String?
+  
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+}
+
+model ValidationLog {
+  id              String   @id @default(cuid())
+  documentId      String   @unique
+  document        Document @relation(fields: [documentId], references: [id], onDelete: Cascade)
+  
+  isValid         Boolean
+  totalMatches    Boolean?
+  lineItemsSum    Float?
+  totalAmount     Float?
+  difference      Float?
+  
+  missingFields   String[] // Array of missing field names
+  validationErrors Json    // Detailed errors
+  warnings        Json
+  
+  createdAt       DateTime @default(now())
+}
+
+model ProcessingLog {
+  id          String   @id @default(cuid())
+  documentId  String
+  document    Document @relation(fields: [documentId], references: [id], onDelete: Cascade)
+  
+  stage       String
+  status      String
+  message     String?
+  metadata    Json?
+  
+  createdAt   DateTime @default(now())
+}
+
+enum ProcessingStatus {
+  PENDING
+  PROCESSING
+  EXTRACTED
+  VALIDATED
+  FAILED
+  REPROCESSING
+}
